@@ -2,59 +2,42 @@
 
 public class Estacionamento
 {
-    private decimal precoInicial = 0;
-    private decimal precoPorHora = 0;
-    private List<string> veiculos = new List<string>();
+    private decimal precoInicial;
+    private decimal precoPorHora;
+    private List<string> veiculos;
 
     public Estacionamento(decimal precoInicial, decimal precoPorHora)
     {
         this.precoInicial = precoInicial;
         this.precoPorHora = precoPorHora;
+        this.veiculos = new List<string>();
     }
 
-    public void AdicionarVeiculo()
+    public bool AdicionarVeiculo(string placa)
     {
-        Console.WriteLine("\n>>> Digite a placa do veículo para estacionar:");
-        string placa = Console.ReadLine() ?? "";
-        veiculos.Add(placa);
+        if (!string.IsNullOrWhiteSpace(placa))
+        {
+            veiculos.Add(placa.ToUpper());
+            return true;
+        }
+        return false;
     }
 
-    public void RemoverVeiculo()
+    public decimal? RemoverVeiculo(string placa, int horasEstacionado)
     {
-        Console.WriteLine("\n>>> Digite a placa do veículo para remover:");
-        string placa = Console.ReadLine() ?? "";
+        var veiculo = veiculos.FirstOrDefault(x => x.ToUpper() == placa.ToUpper());
 
-        // Verifica se o veículo existe
-        if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
+        if (veiculo != null)
         {
-            Console.WriteLine("\n>>> Digite a quantidade de horas que o veículo permaneceu estacionado:");
-            
-            int horasEstacionado = Convert.ToInt32(Console.ReadLine());
-            decimal valorTotal = precoInicial + (precoPorHora * horasEstacionado);
+            veiculos.Remove(veiculo);
+            return precoInicial + (precoPorHora * horasEstacionado);
+        }
 
-            veiculos.Remove(placa);
-            Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
-        }
-        else
-        {
-            Console.WriteLine("\n>>> Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
-        }
+        return null; // não encontrado
     }
 
-    public void ListarVeiculos()
+    public List<string> ListarVeiculos()
     {
-        if (veiculos.Count > 0)
-        {
-            Console.WriteLine("\n>>> Os veículos estacionados são:");
-
-            foreach (var veiculo in veiculos)
-            {
-                Console.WriteLine(veiculo);
-            }
-        }
-        else
-        {
-            Console.WriteLine("\n>>> Não há veículos estacionados.");
-        }
+        return veiculos;
     }
 }
