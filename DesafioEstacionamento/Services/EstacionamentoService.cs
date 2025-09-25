@@ -2,18 +2,11 @@
 
 namespace DesafioEstacionamento.Services;
 
-public class EstacionamentoService
+public class EstacionamentoService(Estacionamento estacionamento)
 {
-    private readonly Estacionamento _estacionamento;
-
-    public EstacionamentoService(Estacionamento estacionamento)
-    {
-        _estacionamento = estacionamento;
-    }
-
     public string CadastrarVeiculo(string placa)
     {
-        bool cadastrado = _estacionamento.AdicionarVeiculo(placa);
+        var cadastrado = estacionamento.AdicionarVeiculo(placa);
         return cadastrado
             ? $">>> Veículo {placa} cadastrado com sucesso!"
             : ">>> Placa inválida. Tente novamente.";
@@ -21,7 +14,7 @@ public class EstacionamentoService
 
     public string RemoverVeiculo(string placa, int horas)
     {
-        var valor = _estacionamento.RemoverVeiculo(placa, horas);
+        var valor = estacionamento.RemoverVeiculo(placa, horas);
 
         return valor.HasValue
             ? $">>> O veículo {placa} foi removido e o preço total foi de: R$ {valor}"
@@ -30,7 +23,7 @@ public class EstacionamentoService
 
     public string ListarVeiculos()
     {
-        var veiculos = _estacionamento.ListarVeiculos();
+        var veiculos = estacionamento.ListarVeiculos();
 
         if (veiculos.Count == 0)
             return ">>> Não há veículos estacionados.";

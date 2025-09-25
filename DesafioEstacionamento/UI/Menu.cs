@@ -2,15 +2,8 @@
 
 namespace DesafioEstacionamento.UI;
 
-public class Menu
+public class Menu(EstacionamentoService service)
 {
-    private readonly EstacionamentoService _service;
-
-    public Menu(EstacionamentoService service)
-    {
-        _service = service;
-    }
-
     public void Exibir()
     {
         string opcao = string.Empty;
@@ -36,7 +29,7 @@ public class Menu
                 case "1":
                     Console.WriteLine("\n>>> Digite a placa do veículo para estacionar:");
                     string placaCadastrar = Console.ReadLine() ?? "";
-                    Console.WriteLine(_service.CadastrarVeiculo(placaCadastrar));
+                    Console.WriteLine(service.CadastrarVeiculo(placaCadastrar));
                     break;
 
                 case "2":
@@ -46,11 +39,11 @@ public class Menu
                     Console.WriteLine("\n>>> Digite a quantidade de horas que o veículo permaneceu estacionado:");
                     int horas = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine(_service.RemoverVeiculo(placaRemover, horas));
+                    Console.WriteLine(service.RemoverVeiculo(placaRemover, horas));
                     break;
 
                 case "3":
-                    Console.WriteLine(_service.ListarVeiculos());
+                    Console.WriteLine(service.ListarVeiculos());
                     break;
 
                 case "4":
