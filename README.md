@@ -18,7 +18,7 @@ donet-cli-estacionamento/
 │   └── Estacionamento.cs
 ├── Services/
 │   └── EstacionamentoService.cs
-├── Views/
+├── UI/
 │   └── Menu.cs
 └── Program.cs
 ```
@@ -29,7 +29,7 @@ donet-cli-estacionamento/
 ---
 
 
-### 🛠️ Funcionalidades
+## 🛠️ Funcionalidades
 
 - [x] Cadastro de veículos
   - [x] Adicionar veículo ao estacionamento
@@ -61,13 +61,13 @@ donet-cli-estacionamento/
 ---
 
 
-## ▶️ Como Executar
+## 🧪 Como Executar
 
 Clone o repositório e entre na pasta do projeto:
 
 ```bash
-git clone <repo>
-cd <repo>
+git clone git@github.com:wastecoder/dotnet-cli-estacionamento.git
+cd dotnet-cli-estacionamento
 dotnet build
 dotnet run
 ```
